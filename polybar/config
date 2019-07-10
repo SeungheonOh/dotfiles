@@ -1,0 +1,156 @@
+[colors]
+Background = #282A36
+Foreground = #F8F8F2
+
+Highlight1 = #ed5565
+Highlight2 = #f8ac59
+Highlight3 = #23c6c8
+Highlight4 = #1ab394
+Highlight5 = #1c84c6
+
+Selection = #44475a
+Comment = #6272a4
+Cyan = #8be9fd
+Green = #50fa7b
+Orange = #ffb86c
+Pink = #ff79c6
+Purple = #bd93f9
+Red = #ff5555
+Yellow = #f1fa8c
+
+
+[settings]
+throttle-ms = 50
+throttle-limit = 5
+
+
+[bar/bar]
+monitor = ${env:MONITOR:}
+override-redirect = true
+wm-restack = i3
+bottom = true
+width = 98%
+height = 27
+offset-x = 1%
+offset-y = 10
+
+padding = 3
+
+enable-ipc = true
+
+background = #FF282A36
+foreground = #FFF8F8F2
+
+radius = 3
+
+font-0 = NotoSans-Regular:size=15;4
+separator = /
+
+
+modules-left = i3
+modules-center = xwindow
+modules-right = cpu memory wlan clock takescreenshot
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 5
+label-mode-background = #FFFFFF
+
+label-focused = %index%
+label-focused-foreground = ${colors.Red}
+label-focused-background = ${colors.Background}
+label-focused-padding = 5
+label-focused-font = 0
+
+label-unfocused = %index%
+label-unfocused-padding = 5
+label-unfocused-font = 0
+
+label-visible = %index%
+label-visible-padding = 5
+label-visible-font = 0
+
+label-urgent = %index%
+label-urgent-foreground = ${colors.Orange}
+label-urgent-background = ${colors.Background}
+label-urgent-padding = 5
+label-urgent-font = 0
+
+label-separator = /
+label-separator-padding = 2
+label-separator-foreground = ${colors.Foreground}
+label-separator-font = 0
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label>
+format-foreground = ${colors.Highlight1}
+format-padding = 5
+
+label = CPU %percentage%%
+label-font = 0
+
+
+[module/memory]
+type = internal/memory
+interval = 0.5
+format = <label>
+format-foreground = ${colors.Highlight2}
+format-padding = 5
+
+label = RAM %gb_used%/%gb_free%
+label-font = 0
+
+
+[module/clock]
+type = internal/date
+format = <label>
+format-foreground = ${colors.Highlight3}
+format-padding = 5
+
+date = %%{T3}%Y-%m-%d %H:%M%%{T-}
+label-font = 0
+
+
+[module/wlan]
+type = internal/network
+interface = wlo1
+interval = 3.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-padding = 5
+format-disconnected-padding = 5
+
+label-connected = %essid%
+label-connected-font = 0
+
+label-disconnected = No Internet Connection
+label-disconnected-font = 0
+
+
+[module/xwindow]
+type = internal/xwindow
+
+label = %title%
+label-maxlen = 50
+label-font = 0
+
+label-empty = Error : 404
+label-empty-foreground = #e34234
+
+[module/takescreenshot]
+type = custom/ipc
+format = <output>
+format-padding = 5
+hook-0 = echo Screenshot
+initial = 1
+click-left = exec $HOME/.config/scripts/screenshot.sh
+click-right = exec $HOME/.config/scripts/screenshot.sh -n 5
+
+; vim:ft=dosini
